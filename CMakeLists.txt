@@ -18,6 +18,9 @@ add_executable(chip8 ${src})
 target_link_libraries(chip8 pthread sfml-audio sfml-graphics sfml-window sfml-system)
 file(COPY "lib/SFML/bin/openal32.dll" DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
+set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
